@@ -1,0 +1,11 @@
+ if you have 5 tables in your schema, then at a minimum, we expect you to implement
+  5 SELECTs, PROVIDERS-SELECT
+  5 INSERTs, PORVIDERS-ADD
+  +1 UPDATE (1 NULLable relationship)
+  +1 DELETE (M:M) 
+  and 1 Dynamic drop-down/Search for a total of 14 functions.
+
+  Change ability for TreatmentID to be NULL, update outline and SQL
+
+ Upload reviews and make any changes:
+    1. CASCADE functions
