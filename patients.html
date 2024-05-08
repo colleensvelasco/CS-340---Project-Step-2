@@ -67,19 +67,17 @@
     </nav>
 
     <h1>Patients</h1>
-    <p>This is a demonstration project created to show students how to create a Flask app and connect it to a MySQL database.</p>
-    <p>Should we do separate or same pages for add, edit, delete patients?</p>
     <div id="browse" style="display: block">
-        <p><strong>Browse patients</strong></p>
-        <table border="1" cellpadding="5">
+        <p><strong>Patient Record</strong></p>
+        <table border="1" cellpadding="8">
           <tr>
             <th><a href="#" onClick="newPatient()">New</a></th>
             <th></th>
-            <th>ID</th>
-            <th>name</th>
-            <th>birth date</th>
-            <th>email</th>
-            <th>provider ID</th>
+            <th>Patient ID</th>
+            <th>Patient Name</th>
+            <th>Birth Date</th>
+            <th>Email</th>
+            <th>Provider</th>
           </tr>
           <tr>
             <td><a href="#" onclick="editPatient('this.patientID')">Edit</a></td>
@@ -88,7 +86,7 @@
             <td >Abby Lee</td>
             <td align="right" >1996-08-5</td>
             <td>abbylee@gmail.com</td>
-            <td align="right" >2</td>
+            <td align="right" >Dr. Liz Dee</td>
           </tr>
           <tr>
             <td><a href="#" onclick="showform('insert')">Edit</a></td>
@@ -97,7 +95,7 @@
             <td >Greg Bill</td>
             <td align="right" >1969-10-12</td>
             <td>gbill@yahoo.com</td>
-            <td align="right" >1</td>
+            <td align="right" >Dr. Robert Green</td>
           </tr>
           <tr>
             <td><a href="#" onclick="editPatient('this.patientID')">Edit</a></td>
@@ -106,7 +104,7 @@
             <td >Hannah Williams</td>
             <td align="right" >2000-01-24</td>
             <td>hills@gmail.com</td>
-            <td align="right" >3</td>
+            <td align="right" >Dr. Sam Kim</td>
           </tr>
         </table>
         <p>&nbsp;</p>
@@ -134,7 +132,7 @@
           <form method="POST" id="updatePatient">
             <legend><strong>Update Patient</strong></legend>
                 <fieldset class="fields">
-                <label>ID:</label> <input type="text" name="patientID">
+                <label>ID:</label> 1
                   <label> Name </label> <input type="text" name="name">
                   <label> Birth Date </label> <input type="text" name="birthDate">
                   <label> Email </label> <input type="text" name="email">
@@ -155,8 +153,8 @@
             <legend><strong>Delete Patient</strong></legend>
                 <fieldset class="fields">
                 <p>Are you sure you wish to delete the following?</p>
-                <label>ID:</label> <input type="text" name="patientID">
-                  <label> Name </label> <input type="text" name="name">
+                <label>Patient ID:</label> 1
+                  <label> Name: </label> Abby Lee
                   
           </fieldset>
           <input class="btn" type="submit" id="DeletePatient" value="Delete Patient">
