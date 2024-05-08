@@ -1,51 +1,114 @@
-/* CREATES FINDING DORY DENTAL TABLES */
+/* PROJECT GROUP 52 - TEAM FINDING DORY 
 
-/* CREATES SPECIALTIES TABLE */
-CREATE TABLE Specialties (
-    specialtyID int AUTO_INCREMENT UNIQUE NOT NULL,
-    specialtyName VARCHAR(50) NOT NULL,
-    PRIMARY KEY (specialtyID)
+Team Members:
+Michelle Rollberg
+Colleen S. H. Velasco
+
+*/
+
+
+SET FOREIGN_KEY_CHECKS=0;
+SET AUTOCOMMIT = 0;
+
+/* CREATES FINDING DORY DENTAL TABLES AND INSERT SAMPLE DATA */
+
+/* CREATES AND INSERTS INTO SPECIALTIES TABLE */
+CREATE OR REPLACE TABLE Specialties (
+    specialtyID int UNIQUE NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    specialtyName VARCHAR(50) NOT NULL
 );
 
-/* CREATES PROVIDERS TABLE */
-CREATE TABLE Providers (
-    providerID int AUTO_INCREMENT UNIQUE NOT NULL,
+INSERT INTO Specialties (specialtyName) 
+    VALUES ('General'), ('Orthodontics'), ('Endodontics'), ('Periodontics');
+
+
+
+/* CREATES AND INSERTS INTO PROVIDERS TABLE */
+CREATE OR REPLACE TABLE Providers (
+    providerID int UNIQUE NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
-    specialtyID int AUTO_INCREMENT UNIQUE NOT NULL,
-    PRIMARY KEY (providerID),
+    specialtyID int NOT NULL,
     FOREIGN KEY (specialtyID) REFERENCES Specialties(specialtyID)
 );
 
-/* CREATES PATIENTS TABLE */
-CREATE TABLE Patients (
-    patientID int AUTO_INCREMENT UNIQUE NOT NULL,
+INSERT INTO Providers (name, specialtyID)
+    VALUES ('Dr. Robert Green', (SELECT specialtyID from Specialties where specialtyName = 'General')),
+    ('Dr. Liz Dee', (SELECT specialtyID from Specialties where specialtyName = 'General')),
+    ('Dr. Sam Kim', (SELECT specialtyID from Specialties where specialtyName = 'Periodontics')),
+    ('Dr. Ana Garcia', (SELECT specialtyID from Specialties where specialtyName = 'Endodontics'));
+
+
+
+/* CREATES AND INSERTS INTO PATIENTS TABLE */
+CREATE OR REPLACE TABLE Patients (
+    patientID int UNIQUE NOT NULL AUTO_INCREMENT PRIMARY KEY,
     patientName VARCHAR(50) NOT NULL,
     birthDate date NOT NULL,
     email VARCHAR(50) NOT NULL,
-    providerID int AUTO_INCREMENT UNIQUE NOT NULL,
-    PRIMARY KEY (patientID),
+    providerID int NOT NULL,
     FOREIGN KEY (providerID) REFERENCES Providers(providerID)
 );
 
-/* CREATES TREATMENTORDERS TABLE */
-CREATE TABLE TreatmentOrders (
-    treatmentOrderID int AUTO_INCREMENT UNIQUE NOT NULL,
-    patientID int AUTO_INCREMENT UNIQUE NOT NULL,
+INSERT INTO Patients (patientName, birthDate, email, providerID) 
+    VALUES ('Abby Lee', '19960805', 'abbylee@gmail.com', (SELECT providerID from Providers where name = 'Dr. Liz Dee')),
+    ('Greg Bill', '19691012', 'gbill@yahoo.com', (SELECT providerID from Providers where name = 'Dr. Robert Green')),
+    ('Hannah Williams', '20000124','hills@gmail.com', (SELECT providerID from Providers where name = 'Dr. Sam Kim')),
+    ('Alex Cruz', '19900920', 'cruzesa@yahoo.com', (SELECT providerID from Providers where name = 'Dr. Robert Green'));
+
+
+
+/* CREATES AND INSERTS INTO TREATMENTS TABLE */
+CREATE OR REPLACE TABLE Treatments (
+    treatmentID int UNIQUE NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+    treatmentName VARCHAR(50) NOT NULL,
+    treatmentDesc VARCHAR(50) NOT NULL,
+    cost int NOT NULL
+);
+
+INSERT INTO Treatments (treatmentName, treatmentDesc, cost)
+    VALUES ('prophy', 'Preventative, yearly cleaning', 125),
+    ('exam', 'Preventative, yearly checkup', 25),
+    ('filling', 'Treatment for hole or decay of tooth', 175),
+    ('root canal', 'Treatment to repair and save infected and damaged tooth', 1000);
+
+
+
+/* CREATES AND INSERTS INTO TREATMENTORDERS TABLE */
+CREATE OR REPLACE TABLE TreatmentOrders (
+    treatmentOrderID int UNIQUE NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    patientID int NOT NULL,
+    dateTx date NOT NULL,
     totalCost int NOT NULL,
-    PRIMARY KEY (treatmentOrderID),
     FOREIGN KEY (patientID) REFERENCES Patients(patientID)
 );
 
+INSERT INTO TreatmentOrders (patientID, dateTx, totalCost) 
+    VALUES ((SELECT patientID from Patients where patientName = 'Abby Lee'), '20240821', 150), 
+    ((SELECT patientID from Patients where patientName = 'Greg Bill'), '20240810', 175),
+    ((SELECT patientID from Patients where patientName = 'Hannah Williams'), '20240811', 1000),
+    ((SELECT patientID from Patients where patientName = 'Alex Cruz'), '20240918', 25);
 
-/* CREATES TREATMENTS TABLE */
-CREATE TABLE Treatments (
-    treatmentID int AUTO_INCREMENT UNIQUE NOT NULL, 
-    treatmentName VARCHAR(50) NOT NULL,
-    treatmentDesc VARCHAR(50) NOT NULL,
-    cost int NOT NULL,
-    PRIMARY KEY (treatmentID),
-    FOREIGN KEY (treatment)
+
+
+/* CREATES AND INSERTS INTO TREATMENTS_TREATMENTORDERS TABLE */
+CREATE OR REPLACE TABLE Treatments_TreatmentOrders (
+    treatmentOrderID int NOT NULL,
+    treatmentID int NOT NULL,
+    FOREIGN KEY (treatmentOrderID) REFERENCES TreatmentOrders(treatmentOrderID),
+    FOREIGN KEY (treatmentID) REFERENCES Treatments(treatmentID),
+    PRIMARY KEY (treatmentOrderID, treatmentID)
 );
 
+INSERT INTO Treatments_TreatmentOrders (treatmentOrderID, treatmentID)
+    VALUES ((SELECT treatmentOrderID from TreatmentOrders where patientID = 1 and dateTx = '20240821'), 
+    (SELECT treatmentID from Treatments where treatmentName = 'prophy')),
+    ((SELECT treatmentOrderID from TreatmentOrders where patientID = 1 and dateTx = '20240821'), (SELECT treatmentID from Treatments where treatmentName = 'exam')),
+    ((SELECT treatmentOrderID from TreatmentOrders where patientID = 2 and dateTx = '20240810'), (SELECT treatmentID from Treatments where treatmentName = 'filling')),
+    ((SELECT treatmentOrderID from TreatmentOrders where patientID = 3 and dateTx = '20240811'), (SELECT treatmentID from Treatments where treatmentName = 'root canal')),
+    ((SELECT treatmentOrderID from TreatmentOrders where patientID = 4 and dateTx = '20240918'), (SELECT treatmentID from Treatments where treatmentName = 'exam'));
 
-/* CREATES TREATMENTS_TREATMENTORDERS TABLE */
+
+
+
+SET FOREIGN_KEY_CHECKS=1;
+COMMIT;
