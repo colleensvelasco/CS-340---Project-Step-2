@@ -71,10 +71,10 @@
     <h1>Treatment Orders and Ordered Treatments</h1>
     <p>This is a demonstration project created to show students how to create a Flask app and connect it to a MySQL database.</p>
     <div id="browse" style="display: block">
-        <p><strong>Browse Orders & Ordered Treatments</strong></p>
+        <p><strong>Browse Treatment Orders</strong></p>
         <table border="1" cellpadding="5">
           <tr>
-            <th>Order ID</th>
+            <th>Treatment Order ID</th>
             <th>Patient ID</th>
             <th>Treatment Date</th>
             <th>Total Cost</th>
@@ -91,37 +91,100 @@
             <td align="right" >2024-08-10</td>
             <td align="right" >175</td>
           </tr>
+        </table>
+        <p><strong>Browse Ordered Treatments</strong></p>
+          <table border="1" cellpadding="5">
+            <tr>
+              <th>Treatment Order ID</th>
+              <th>Treatment ID</th>
+            </tr>
           <tr>
-            <td></td>
-            <td align="right" >3</td>
-            <td >Dr. Sam Kim</td>
-            <td align="right" >Periodontics</td>
+            <td align="right" >1</td>
+            <td align="right" >1</td>
           </tr>
           <tr>
-            <td></td>
-            <td align="right" >4</td>
-            <td >Dr. Ana Garcia</td>
-            <td align="right" >Endodontics</td>
+            <td align="right" >1</td>
+            <td align="right" >2</td>
+          </tr>
+          <tr>
+            <td align="right" >2</td>
+            <td align="right" >3</td>
           </tr>
         </table>
         <p>&nbsp;</p>
-        </div> <!-- browse -->
+        </div> <!-- browse INSERT Treatment Order-->
         <div id="insert">
-          <form method="POST" id="addProvider">
-            <legend><strong>Add Provider</strong></legend>
+          <form method="POST" id="addTreatmentOrderWithoutTreatments">
+            <legend><strong>Add an order without treatments</strong></legend>
               <fieldset class="fields">
-                <label> Name </label> <input type="text" name="name">
-                <label> Specialty Name </label> <select name="specialtyID">
-                    <option value="0" selected>General</option>
-                    <option value="1">Orthodontics</option>
-                    <option value="2">Endodontics</option>
-                    <option value="3">Periodontics</option>
+                <label> Patient ID </label> <input type="text" name="patientID">
+                <label> Treatment Date </label> <input type="text" name="dateTx">
                 </select>
               </fieldset>
-              <input class="btn" type="submit" id="addProvider" value="Add provider">
-              <input class="btn" type="button" value="cancel" onClick="browsePeople()">
+              <input class="btn" type="submit" id="addTreatmentOrderWithoutTreatments" value="Add treatment order without treatments">
+              <input class="btn" type="button" value="cancel" onClick="browseTreatmentOrder()">
           </form> 
         </div><!-- insert --> 
+        <p>&nbsp;</p>
+         <!-- browse INSERT Intersection Table -->
+        <div id="insertOrderedTreatment">
+          <form method="POST" id="addOrderedTreatment">
+            <legend><strong>Add an order with ordered treatments</strong></legend>
+              <fieldset class="fields">
+                <label> Treatment Order ID </label> <input type="text" name="treatmentOrderID">
+                <label> Treatment ID </label> <input type="text" name="treatmentID">
+                </select>
+              </fieldset>
+              <input class="btn" type="submit" id="addOrderedTreatment" value="Add ordered treatments">
+              <input class="btn" type="button" value="cancel" onClick="browseTreatmentOrder()">
+          </form> 
+        </div><!-- insert --> 
+      <!-- UPDATE Treatment Order-->
+      <p>&nbsp;</p>
+      <div id="update" >
+        <form method="POST" id="updateTreatmentOrder">
+          <legend><strong>Update an order</strong></legend>
+              <fieldset class="fields">
+              <label> Treatment Order ID </label> <input type="text" name="treatmentOrderID">
+              <label> Patient ID </label> <input type="text" name="patientID">
+              <label> Treatment Date </label> <input type="text" name="dateTx">
+              <!--What should we do with the price here?
+              <label> Total Cost </label> <input type="text" name="totalCost">-->
+        </fieldset>
+        <input class="btn" type="submit" id="UpdateSaveTreatmentOrder" value="Save Update Treatment Order">
+              <input class="btn" type="button" value="cancel" onClick="browseTreatmentOrder()">
+        </form> 
+      </div>
+      <p>&nbsp;</p>
+      <!-- DELETE Ordered Treatment Order-->
+      <div id="delete" style="display: block">
+        <form method="POST" id="deleteOrderedTreatmentOrder">
+          <legend><strong>Delete Ordered Treatment Order</strong></legend>
+              <fieldset class="fields">
+              <p>Are you sure you wish to delete the following?</p>
+              <label> Treatment Order ID </label> <input type="text" name="treatmentOrderID">
+              <label> Patient ID </label> <input type="text" name="patientID">
+                
+        </fieldset>
+        <input class="btn" type="submit" id="deleteOrderedTreatmentOrder" value="Delete ordered treatment order">
+              <input class="btn" type="button" value="cancel" onClick="browseTreatmentOrder()">
+        </form> 
+      </div>
+      <p>&nbsp;</p>
+      <!-- DELETE Treatment Order-->
+      <div id="delete" style="display: block">
+        <form method="POST" id="deleteTreatmentOrder">
+          <legend><strong>Delete Treatment Order</strong></legend>
+              <fieldset class="fields">
+              <p>Are you sure you wish to delete the following?</p>
+              <label> Treatment Order ID </label> <input type="text" name="treatmentOrderID">
+              <label> Treatment ID </label> <input type="text" name="treatmentID">
+              <label> Treatment Date </label> <input type="text" name="dateTx"> 
+        </fieldset>
+        <input class="btn" type="submit" id="deleteTreatmentOrder" value="Delete treatment order">
+              <input class="btn" type="button" value="cancel" onClick="browseTreatmentOrder()">
+        </form> 
+      </div>
     
 </body>
 </html>
