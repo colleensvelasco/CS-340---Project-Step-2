@@ -1,3 +1,11 @@
+/* PROJECT GROUP 52 - TEAM FINDING DORY 
+
+Team Members:
+Michelle Rollberg
+Colleen S. H. Velasco
+
+*/
+
 -- DATA MANIPULATION QUERIES
 
 ---- PATIENTS ----
@@ -73,7 +81,7 @@ INSERT INTO Treatments (treatmentName, treatmentDesc, cost)
 
 
 
----- TREATMENT ORDERS AND TREATMENT_TREATMENTORDERS ----
+---- TREATMENT ORDERS AND TREATMENT_TREATMENTORDERS (ORDERED TREATMENTS) ----
 
 -- SELECT - Show all treatment orders
 SELECT treatmentOrderID, patientID, dateTx, totalCost FROM TreatmentOrders
