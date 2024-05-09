@@ -81,18 +81,31 @@ SELECT treatmentOrderID, patientID, dateTx, totalCost FROM TreatmentOrders
 -- SELECT - Show all ordered treatments
 SELECT treatmentOrderID, treatmentID FROM Treatments_TreatmentOrders
 
+-- Patient Name Dropdown (When Adding New Treatment Order)
+-- MIGHT BE CHANGED TO SEARCH LATER ON (FKs CAN ONLY BE DROPDOWN OR SEARCH)
+SELECT patientID, patientName FROM Patients
+
 -- CREATE TREATMENT ORDER WITHOUT TREATMENTS - Adds treatment order without treatments
 -- Total Cost is 0
+-- WORKING ON MAKING TOTAL COST A SUM OF ALL THE TREATMENTS OF THAT TREATMENT ORDER
 INSERT INTO TreatmentOrders (patientID, dateTx, totalCost)
-    VALUES (:patientIDInput, :dateTxInput, 0)
+    VALUES (:patient_ID_from_dropdown_Input, :dateTxInput, 0)
+
+-- Patient Name Dropdown (gets all treatmentIDs and names to populate provider dropdown) when adding
+-- new treatment_treatmentorders (new treatments to specified treatment order)
+SELECT patientID, patientName FROM Patients
 
 -- Treatment Dropdown (gets all treatmentIDs and names to populate provider dropdown) when adding
 -- new treatment_treatmentorders (new treatments to specified treatment order)
 SELECT treatmentID, treatmentName FROM Treatments
 
+-- Finds TreatmentOrderID matching patientID and dateTx
+SELECT treatmentOrderID FROM TreatmentOrders
+    WHERE patientID = :patientName_ID_selected_from_dropdown AND dateTx = :dateTx_selected_from_dropdown
+
 -- CREATE TREATMENT_TREATMENTORDER - Adds treatment order with treatments
 INSERT INTO Treatments_TreatmentOrders (treatmentOrderID, treatmentID)
-    VALUES (:treatmentOrderIDgenerated, :treatment_ID_from_dropdown_Input)
+    VALUES (:treatmentOrderID_matching_patientName_and_date, :treatment_ID_from_dropdown_Input)
 
 -- UPDATE TREATMENT_TREATMENTORDER - Updates treatment on treatment order
 SELECT treatmentOrderID, treatmentID

@@ -45,12 +45,12 @@ CREATE OR REPLACE TABLE Patients (
     patientName VARCHAR(50) NOT NULL,
     birthDate date NOT NULL,
     email VARCHAR(50) NOT NULL,
-    providerID int NOT NULL,
+    providerID int,
     FOREIGN KEY (providerID) REFERENCES Providers(providerID)
 );
 
 INSERT INTO Patients (patientName, birthDate, email, providerID) 
-    VALUES ('Abby Lee', '19960805', 'abbylee@gmail.com', (SELECT providerID from Providers where name = 'Dr. Liz Dee')),
+    VALUES ('Abby Lee', '19960805', 'abbylee@gmail.com', NULL),
     ('Greg Bill', '19691012', 'gbill@yahoo.com', (SELECT providerID from Providers where name = 'Dr. Robert Green')),
     ('Hannah Williams', '20000124','hills@gmail.com', (SELECT providerID from Providers where name = 'Dr. Sam Kim')),
     ('Alex Cruz', '19900920', 'cruzesa@yahoo.com', (SELECT providerID from Providers where name = 'Dr. Robert Green'));
@@ -79,8 +79,9 @@ CREATE OR REPLACE TABLE TreatmentOrders (
     patientID int NOT NULL,
     dateTx date NOT NULL,
     totalCost int NOT NULL,
-    FOREIGN KEY (patientID) REFERENCES Patients(patientID)
+    FOREIGN KEY (patientID) REFERENCES Patients(patientID) ON DELETE CASCADE
 );
+-- if patientID is deleted from Patients, is deleted from TreatmentOrders table
 
 INSERT INTO TreatmentOrders (patientID, dateTx, totalCost) 
     VALUES ((SELECT patientID from Patients where patientName = 'Abby Lee'), '20240821', 150), 
@@ -94,10 +95,13 @@ INSERT INTO TreatmentOrders (patientID, dateTx, totalCost)
 CREATE OR REPLACE TABLE Treatments_TreatmentOrders (
     treatmentOrderID int NOT NULL,
     treatmentID int NOT NULL,
-    FOREIGN KEY (treatmentOrderID) REFERENCES TreatmentOrders(treatmentOrderID),
-    FOREIGN KEY (treatmentID) REFERENCES Treatments(treatmentID),
+    FOREIGN KEY (treatmentOrderID) REFERENCES TreatmentOrders(treatmentOrderID) ON DELETE CASCADE,
+    FOREIGN KEY (treatmentID) REFERENCES Treatments(treatmentID) ON DELETE CASCADE,
     PRIMARY KEY (treatmentOrderID, treatmentID)
 );
+-- if treatmentOrderID is deleted from TreatmentOrders, is deleted from Treatments_TreatmentOrders table
+-- if treatmentID is deleted from Treatments, is deleted from Treatments_TreatmentOrders table
+
 
 INSERT INTO Treatments_TreatmentOrders (treatmentOrderID, treatmentID)
     VALUES ((SELECT treatmentOrderID from TreatmentOrders where patientID = 1 and dateTx = '20240821'), 

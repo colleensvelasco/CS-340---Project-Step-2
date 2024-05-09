@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Finding Dory Dental</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
     <script language="JavaScript">
         function showform(dowhat) {
           /*
@@ -14,6 +15,13 @@
             document.getElementById('update').style.display = 'none';
             document.getElementById('delete').style.display = 'none';
           }
+          else if (dowhat == 'insertOrderedTreatment'){
+            document.getElementById('browse').style.display = 'none';
+            document.getElementById('insertOrderedTreatment').style.display = 'block';
+            document.getElementById('update').style.display = 'none';
+            document.getElementById('delete').style.display = 'none';
+          }
+
           else if (dowhat == 'update'){
             document.getElementById('browse').style.display = 'none';
             document.getElementById('insert').style.display = 'none';
@@ -37,11 +45,17 @@
             document.getElementById('insert').style.display = 'none';
             document.getElementById('update').style.display = 'none';
             document.getElementById('delete').style.display = 'none';
+            document.getElementById('insertOrderedTreatment').style.display = 'none';
           }
         }
+
         function newTreatmentOrder() { 
           showform('insert'); 
         }
+        function newOrderedTreatment() {
+          showform('insertOrderedTreatment');
+        }
+
         function editOrderedTreatment() {
           showform('update');
         }
@@ -49,14 +63,14 @@
         function deleteOrderedTreatment() {
           showform('delete');
         }
-        function browseTreatmentOrder() {
+        function browseTreatmentOrderAndOrderedTreatment() {
           showform('browse'); 
         }
         function showAll() { 
             showform ('all'); }
       </script>
 </head>
-<body onload="showAll()">
+<body onload="browseTreatmentOrderAndOrderedTreatment()">
     <nav class="menu">
         <ul>
             <li><a href="/">Home</a></li>
@@ -64,7 +78,7 @@
             <li><a href="/providers.html">Providers</a></li>
             <li><a href="/patients.html">Patients</a></li>
             <li><a href="/treatments.html">Treatments</a></li>
-            <li><a href="/treatmentOrdersAndOrderedTreatments.html">Treatment Orders and Ordered Treatments</a></li>
+            <li><a href="/treatmentOrdersOrderedTreatments.html">Treatment Orders and Ordered Treatments</a></li>
         </ul>
     </nav>
 
@@ -73,18 +87,21 @@
         <p><strong>Treatment Orders Record</strong></p>
         <table border="1" cellpadding="8">
           <tr>
+            <th><a href="#" onClick="newTreatmentOrder()">New</a></th>
             <th>Treatment Order ID</th>
             <th>Patient ID</th>
             <th>Treatment Date</th>
             <th>Total Cost</th>
           </tr>
           <tr>
+            <td></td>
             <td align="right" >1</td>
             <td align="right" >1</td>
             <td align="right" >2024-08-21</td>
             <td align="right" >150</td>
           </tr>
           <tr>
+            <td></td>
             <td align="right" >2</td>
             <td align="right" >2</td>
             <td align="right" >2024-08-10</td>
@@ -93,9 +110,10 @@
         </table>
         <p><strong>Ordered Treatments Record</strong></p>
           <table border="1" cellpadding="8">
-            <tr>
+            <tr>     
+              <th><a href="#" onClick="newOrderedTreatment()">New</a></th>
               <th></th>
-              <th></th>
+          
               <th>Treatment Order ID</th>
               <th>Treatment ID</th>
             </tr>
@@ -124,12 +142,17 @@
           <form method="POST" id="addTreatmentOrderWithoutTreatments">
             <legend><strong>Add an order without treatments</strong></legend>
               <fieldset class="fields">
-                <label> Patient ID </label> <input type="text" name="patientID">
-                <label> Treatment Date </label> <input type="text" name="dateTx">
+                <label> Patient Name </label> <select name="treatmentName">
+                    <option value="1" selected>Abby Lee</option>
+                    <option value="2">Greg Bill</option>
+                    <option value="3">Hannah Williams</option>
+                    <option value="4">Alex Cruz</option>
+                  </select>
+                <label> Treatment Date </label> <input type="date" value="2024-05-08" />
                 </select>
               </fieldset>
               <input class="btn" type="submit" id="addTreatmentOrderWithoutTreatments" value="Add treatment order without treatments">
-              <input class="btn" type="button" value="cancel" onClick="browseTreatmentOrder()">
+              <input class="btn" type="button" value="cancel" onClick="browseTreatmentOrderAndOrderedTreatment()">
           </form> 
         </div><!-- insert --> 
         <p>&nbsp;</p>
@@ -138,6 +161,14 @@
           <form method="POST" id="addOrderedTreatment">
             <legend><strong>Add ordered treatments to order created</strong></legend>
               <fieldset class="fields">
+                <label> Treatment Order of Patient Name: </label> <select name="patientName">
+                  <option value="1" selected>Abby Lee</option>
+                  <option value="2">Greg Bill</option>
+                  <option value="3">Hannah Williams</option>
+                  <option value="4">Alex Cruz</option>
+                </select>
+                <label> on the Date: </label> <input type="date" value="2024-05-08" />
+                </select>
                 <label> Treatment Name </label><select name="treatmentName">
                   <option value="1" selected>prophy</option>
                   <option value="2">exam</option>
@@ -147,7 +178,7 @@
                 </select>
               </fieldset>
               <input class="btn" type="submit" id="addOrderedTreatment" value="Add ordered treatments">
-              <input class="btn" type="button" value="cancel" onClick="browseTreatmentOrder()">
+              <input class="btn" type="button" value="cancel" onClick="browseTreatmentOrderAndOrderedTreatment()">
           </form> 
         </div><!-- insert --> 
       <!-- UPDATE Treatment Order-->
@@ -156,7 +187,9 @@
         <form method="POST" id="updateTreatmentOrder">
           <legend><strong>Update ordered treatment</strong></legend>
               <fieldset class="fields">
-                <label> Treatment Name </label><select name="treatmentName">
+                <label> Treatment Order: ID </label> 1
+                <!-- WILL CHECK IF IT'S OKAY THAT FOR UPDATE WE CAN ONLY CHANGE TREATMENT BUT NOT TREATMENTORDER IT'S ASSIGNED TO-->
+                <label> Treatment Name: </label><select name="treatmentName">
                   <option value="1" selected>prophy</option>
                   <option value="2">exam</option>
                   <option value="3">filling</option>
@@ -166,7 +199,7 @@
               <label> Total Cost </label> <input type="text" name="totalCost">-->
         </fieldset>
         <input class="btn" type="submit" id="UpdateSaveTreatmentOrder" value="Save Update Treatment Order">
-              <input class="btn" type="button" value="cancel" onClick="browseTreatmentOrder()">
+              <input class="btn" type="button" value="cancel" onClick="browseTreatmentOrderAndOrderedTreatment()">
         </form> 
       </div>
       <p>&nbsp;</p>
@@ -181,7 +214,7 @@
                 
         </fieldset>
         <input class="btn" type="submit" id="deleteOrderedTreatmentOrder" value="Delete ordered treatment order">
-              <input class="btn" type="button" value="cancel" onClick="browseTreatmentOrder()">
+              <input class="btn" type="button" value="cancel" onClick="browseTreatmentOrderAndOrderedTreatment()">
         </form> 
       </div>
       <p>&nbsp;</p>

@@ -1,0 +1,15 @@
+
+h1, p, div {
+    text-align: center;
+}
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+form {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}

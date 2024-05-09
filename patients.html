@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Finding Dory Dental</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
     <script language="JavaScript">
         function showform(dowhat) {
           /*
@@ -49,20 +50,20 @@
         function deletePatient() {
           showform('delete');
         }
-        function browsePeople() {
+        function browsePatient() {
           showform('browse'); 
         }
       </script>
 </head>
-<body onload="browsePeople()">
+<body onload="browsePatient()">
     <nav class="menu">
-        <ul>
-            <li><a href="/">Home</a></li>
+      <ul>
+        <li><a href="/">Home</a></li>
             <li><a href="/specialties.html">Specialties</a></li>
             <li><a href="/providers.html">Providers</a></li>
             <li><a href="/patients.html">Patients</a></li>
             <li><a href="/treatments.html">Treatments</a></li>
-            <li><a href="/treatmentOrdersAndOrderedTreatments.html">Treatment Orders and Ordered Treatments</a></li>
+            <li><a href="/treatmentOrdersOrderedTreatments.html">Treatment Orders and Ordered Treatments</a></li>
         </ul>
     </nav>
 
@@ -117,14 +118,15 @@
                 <label> Birth Date </label> <input type="text" name="birthDate">
                 <label> Email </label> <input type="text" name="email">
                 <label> Provider Name </label> <select name="providerID">
-                    <option value="0" selected>Dr. Robert Green</option>
-                    <option value="1">Dr. Liz Dee</option>
-                    <option value="2">Dr. Sam Kim</option>
-                    <option value="3">Dr. Ana Garcia</option>
+                  <option value="0" selected></option>
+                  <option value="1" >Dr. Robert Green</option>
+                  <option value="2">Dr. Liz Dee</option>
+                  <option value="3">Dr. Sam Kim</option>
+                  <option value="4">Dr. Ana Garcia</option>
                 </select>
               </fieldset>
               <input class="btn" type="submit" id="addPatient" value="Add patient">
-              <input class="btn" type="button" value="cancel" onClick="browsePeople()">
+              <input class="btn" type="button" value="cancel" onClick="browsePatient()">
           </form> 
         </div><!-- insert -->
         <p>&nbsp;</p>
@@ -137,14 +139,15 @@
                   <label> Birth Date </label> <input type="text" name="birthDate">
                   <label> Email </label> <input type="text" name="email">
                   <label> Provider Name </label> <select name="providerID">
-                    <option value="0" selected>Dr. Robert Green</option>
-                    <option value="1">Dr. Liz Dee</option>
-                    <option value="2">Dr. Sam Kim</option>
-                    <option value="3">Dr. Ana Garcia</option>
+                    <option value="0" selected></option>
+                    <option value="1" >Dr. Robert Green</option>
+                    <option value="2">Dr. Liz Dee</option>
+                    <option value="3">Dr. Sam Kim</option>
+                    <option value="4">Dr. Ana Garcia</option>
                 </select>
           </fieldset>
           <input class="btn" type="submit" id="UpdateSavePatient" value="Save Update Patient">
-                <input class="btn" type="button" value="cancel" onClick="browsePeople()">
+                <input class="btn" type="button" value="cancel" onClick="browsePatient()">
           </form> 
         </div>
         <p>&nbsp;</p>
@@ -158,7 +161,7 @@
                   
           </fieldset>
           <input class="btn" type="submit" id="DeletePatient" value="Delete Patient">
-                <input class="btn" type="button" value="cancel" onClick="browsePeople()">
+                <input class="btn" type="button" value="cancel" onClick="browsePatient()">
           </form> 
         </div>
 </body>

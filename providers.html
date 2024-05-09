@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Finding Dory Dental</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
     <script language="JavaScript">
         function showform(dowhat) {
           /*
@@ -49,13 +50,13 @@
 </head>
 <body onload="browseProvider()">
     <nav class="menu">
-        <ul>
-            <li><a href="/">Home</a></li>
+      <ul>
+        <li><a href="/">Home</a></li>
             <li><a href="/specialties.html">Specialties</a></li>
             <li><a href="/providers.html">Providers</a></li>
             <li><a href="/patients.html">Patients</a></li>
             <li><a href="/treatments.html">Treatments</a></li>
-            <li><a href="/treatmentOrdersAndOrderedTreatments.html">Treatment Orders and Ordered Treatments</a></li>
+            <li><a href="/treatmentOrdersOrderedTreatments.html">Treatment Orders and Ordered Treatments</a></li>
         </ul>
     </nav>
 
@@ -103,14 +104,14 @@
               <fieldset class="fields">
                 <label> Name </label> <input type="text" name="name">
                 <label> Specialty Name </label> <select name="specialtyID">
-                    <option value="0" selected>General</option>
+                    <option value="0" selected >General</option>
                     <option value="1">Orthodontics</option>
                     <option value="2">Endodontics</option>
                     <option value="3">Periodontics</option>
                 </select>
               </fieldset>
               <input class="btn" type="submit" id="addProvider" value="Add provider">
-              <input class="btn" type="button" value="cancel" onClick="browsePeople()">
+              <input class="btn" type="button" value="cancel" onClick="browseProvider()">
           </form> 
         </div><!-- insert --> 
 </body>
