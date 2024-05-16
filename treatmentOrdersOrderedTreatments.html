@@ -71,6 +71,8 @@
       </script>
 </head>
 <body onload="browseTreatmentOrderAndOrderedTreatment()">
+  <h1>Finding Dory Dental</h1>
+
     <nav class="menu">
         <ul>
             <li><a href="/">Home</a></li>
@@ -81,34 +83,41 @@
             <li><a href="/treatmentOrdersOrderedTreatments.html">Treatment Orders and Ordered Treatments</a></li>
         </ul>
     </nav>
-
+    
     <h1>Treatment Orders and Ordered Treatments</h1>
     <div id="browse" style="display: block">
-        <p><strong>Treatment Orders Record</strong></p>
+        <p>&nbsp;</p>
+        <h2>Treatment Orders Record</h2>
+        <p>A treatment order can be created for a patient and specific treatments, such as an exam, prophy, and filling, can 
+          be added to it. 
+        </p>
         <table border="1" cellpadding="8">
           <tr>
             <th><a href="#" onClick="newTreatmentOrder()">New</a></th>
             <th>Treatment Order ID</th>
             <th>Patient ID</th>
             <th>Treatment Date</th>
-            <th>Total Cost</th>
           </tr>
           <tr>
             <td></td>
             <td align="right" >1</td>
             <td align="right" >1</td>
             <td align="right" >2024-08-21</td>
-            <td align="right" >150</td>
           </tr>
           <tr>
             <td></td>
             <td align="right" >2</td>
             <td align="right" >2</td>
             <td align="right" >2024-08-10</td>
-            <td align="right" >175</td>
           </tr>
         </table>
-        <p><strong>Ordered Treatments Record</strong></p>
+
+
+
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <h2>Ordered Treatments Record</h2>
+        <p>Treatments (i.e. exam, prophy, and filling) can be added, edited, and deleted from the treatment order they are contained on.</p>
           <table border="1" cellpadding="8">
             <tr>     
               <th><a href="#" onClick="newOrderedTreatment()">New</a></th>
@@ -137,10 +146,13 @@
           </tr>
         </table>
         <p>&nbsp;</p>
-        </div> <!-- browse INSERT Treatment Order-->
+        </div>
+        
+        
+        <!-- browse INSERT Treatment Order-->
         <div id="insert">
-          <form method="POST" id="addTreatmentOrderWithoutTreatments">
-            <legend><strong>Add an order without treatments</strong></legend>
+          <form method="POST" id="addTreatmentOrder">
+            <legend><strong>Create a New Treatment Order</strong></legend>
               <fieldset class="fields">
                 <label> Patient Name </label> <select name="treatmentName">
                     <option value="1" selected>Abby Lee</option>
@@ -151,7 +163,54 @@
                 <label> Treatment Date </label> <input type="date" value="2024-05-08" />
                 </select>
               </fieldset>
-              <input class="btn" type="submit" id="addTreatmentOrderWithoutTreatments" value="Add treatment order without treatments">
+              <p>&nbsp;</p>
+              <legend><strong>Add Treatments to the New Treatment Order</strong></legend>
+              <fieldset class="fields">
+                <label> Treatment Name: </label><select name="treatmentName">
+                  <option value="0" selected></option>
+                  <option value="1">prophy</option>
+                  <option value="2">exam</option>
+                  <option value="3">filling</option>
+                  <option value="4">root canal</option>
+                </select>
+                <br>
+                <br>
+                  <label> Treatment Name: </label><select name="treatmentName">
+                    <option value="0" selected></option>
+                    <option value="1">prophy</option>
+                    <option value="2">exam</option>
+                    <option value="3">filling</option>
+                    <option value="4">root canal</option>
+                </select>
+                <br>
+                <br>
+                <label> Treatment Name: </label><select name="treatmentName">
+                  <option value="0" selected></option>
+                  <option value="1">prophy</option>
+                  <option value="2">exam</option>
+                  <option value="3">filling</option>
+                  <option value="4">root canal</option>
+                </select>
+                <br>
+                <br>
+                <label> Treatment Name: </label><select name="treatmentName">
+                  <option value="0" selected></option>
+                  <option value="1">prophy</option>
+                  <option value="2">exam</option>
+                  <option value="3">filling</option>
+                  <option value="4">root canal</option>
+                </select>
+                <br>
+                <br>
+                <label> Treatment Name: </label><select name="treatmentName">
+                  <option value="0" selected></option>
+                  <option value="1">prophy</option>
+                  <option value="2">exam</option>
+                  <option value="3">filling</option>
+                  <option value="4">root canal</option>
+                </select>
+              </fieldset>
+              <input class="btn" type="submit" id="addTreatmentOrder" value="Add Treatment Order">
               <input class="btn" type="button" value="cancel" onClick="browseTreatmentOrderAndOrderedTreatment()">
           </form> 
         </div><!-- insert --> 
@@ -168,6 +227,8 @@
                   <option value="4">Alex Cruz</option>
                 </select>
                 <label> on the Date: </label> <input type="date" value="2024-05-08" />
+                <br>
+                <br>
                 </select>
                 <label> Treatment Name </label><select name="treatmentName">
                   <option value="1" selected>prophy</option>
@@ -187,7 +248,7 @@
         <form method="POST" id="updateTreatmentOrder">
           <legend><strong>Update ordered treatment</strong></legend>
               <fieldset class="fields">
-                <label> Treatment Order: ID </label> 1
+                <label> Treatment Order ID: </label> 1
                 <!-- WILL CHECK IF IT'S OKAY THAT FOR UPDATE WE CAN ONLY CHANGE TREATMENT BUT NOT TREATMENTORDER IT'S ASSIGNED TO-->
                 <label> Treatment Name: </label><select name="treatmentName">
                   <option value="1" selected>prophy</option>
@@ -209,7 +270,7 @@
           <legend><strong>Delete Ordered Treatment Order</strong></legend>
               <fieldset class="fields">
               <p>Are you sure you wish to delete the following?</p>
-              <label> Treatment Order ID </label> 1
+              <label> Treatment Order ID: </label> 1
               <label> Treatment Name: </label> prophy
                 
         </fieldset>

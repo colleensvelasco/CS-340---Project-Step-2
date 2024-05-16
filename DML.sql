@@ -93,19 +93,24 @@ SELECT treatmentOrderID, treatmentID FROM Treatments_TreatmentOrders
 -- MIGHT BE CHANGED TO SEARCH LATER ON (FKs CAN ONLY BE DROPDOWN OR SEARCH)
 SELECT patientID, patientName FROM Patients
 
--- CREATE TREATMENT ORDER WITHOUT TREATMENTS - Adds treatment order without treatments
--- Total Cost is 0
--- WORKING ON MAKING TOTAL COST A SUM OF ALL THE TREATMENTS OF THAT TREATMENT ORDER
-INSERT INTO TreatmentOrders (patientID, dateTx, totalCost)
-    VALUES (:patient_ID_from_dropdown_Input, :dateTxInput, 0)
+-- CREATE TREATMENT ORDER  - Adds treatment order 
 
--- Patient Name Dropdown (gets all treatmentIDs and names to populate provider dropdown) when adding
--- new treatment_treatmentorders (new treatments to specified treatment order)
-SELECT patientID, patientName FROM Patients
+INSERT INTO TreatmentOrders (patientID, dateTx)
+    VALUES (:patient_ID_from_dropdown_Input, :dateTxInput)
+
+-- ADD TREATMENTS TO NEW TREATMENT ORDER TO BE CREATED
+INSERT INTO Treatments_TreatmentOrders (treatmentOrderID, treatmentID)
+    VALUES ((:treatmentOrderID_to_be_created, :treatment_ID_from_dropdown_Input))
 
 -- Treatment Dropdown (gets all treatmentIDs and names to populate provider dropdown) when adding
 -- new treatment_treatmentorders (new treatments to specified treatment order)
 SELECT treatmentID, treatmentName FROM Treatments
+
+
+
+-- Patient Name Dropdown (gets all treatmentIDs and names to populate provider dropdown) when adding
+-- new treatment_treatmentorders (new treatments to specified treatment order)
+SELECT patientID, patientName FROM Patients
 
 -- Finds TreatmentOrderID matching patientID and dateTx
 SELECT treatmentOrderID FROM TreatmentOrders

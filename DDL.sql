@@ -78,16 +78,17 @@ CREATE OR REPLACE TABLE TreatmentOrders (
     treatmentOrderID int UNIQUE NOT NULL AUTO_INCREMENT PRIMARY KEY,
     patientID int NOT NULL,
     dateTx date NOT NULL,
-    totalCost int NOT NULL,
     FOREIGN KEY (patientID) REFERENCES Patients(patientID) ON DELETE CASCADE
 );
 -- if patientID is deleted from Patients, is deleted from TreatmentOrders table
 
-INSERT INTO TreatmentOrders (patientID, dateTx, totalCost) 
-    VALUES ((SELECT patientID from Patients where patientName = 'Abby Lee'), '20240821', 150), 
-    ((SELECT patientID from Patients where patientName = 'Greg Bill'), '20240810', 175),
-    ((SELECT patientID from Patients where patientName = 'Hannah Williams'), '20240811', 1000),
-    ((SELECT patientID from Patients where patientName = 'Alex Cruz'), '20240918', 25);
+
+
+INSERT INTO TreatmentOrders (patientID, dateTx) 
+    VALUES ((SELECT patientID from Patients where patientName = 'Abby Lee'), '20240821'), 
+    ((SELECT patientID from Patients where patientName = 'Greg Bill'), '20240810'),
+    ((SELECT patientID from Patients where patientName = 'Hannah Williams'), '20240811'),
+    ((SELECT patientID from Patients where patientName = 'Alex Cruz'), '20240918');
 
 
 
