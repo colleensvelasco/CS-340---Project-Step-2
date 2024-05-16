@@ -83,8 +83,9 @@ INSERT INTO Treatments (treatmentName, treatmentDesc, cost)
 
 ---- TREATMENT ORDERS AND TREATMENT_TREATMENTORDERS (ORDERED TREATMENTS) ----
 
--- SELECT - Show all treatment orders
-SELECT treatmentOrderID, patientID, dateTx, totalCost FROM TreatmentOrders
+-- SELECT - Show all treatment orders with Patient Name too
+SELECT treatmentOrderID, patientID, dateTx FROM TreatmentOrders
+
 
 -- SELECT - Show all ordered treatments
 SELECT treatmentOrderID, treatmentID FROM Treatments_TreatmentOrders
