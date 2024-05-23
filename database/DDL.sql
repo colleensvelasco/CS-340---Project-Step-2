@@ -45,11 +45,11 @@ CREATE OR REPLACE TABLE Patients (
     patientName VARCHAR(50) NOT NULL,
     birthDate date NOT NULL,
     email VARCHAR(50) NOT NULL,
-    providerID int,
+    ptproviderID int,
     FOREIGN KEY (providerID) REFERENCES Providers(providerID)
 );
 
-INSERT INTO Patients (patientName, birthDate, email, providerID) 
+INSERT INTO Patients (patientName, birthDate, email, ptproviderID) 
     VALUES ('Abby Lee', '19960805', 'abbylee@gmail.com', NULL),
     ('Greg Bill', '19691012', 'gbill@yahoo.com', (SELECT providerID from Providers where name = 'Dr. Robert Green')),
     ('Hannah Williams', '20000124','hills@gmail.com', (SELECT providerID from Providers where name = 'Dr. Sam Kim')),

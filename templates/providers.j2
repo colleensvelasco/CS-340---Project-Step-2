@@ -1,0 +1,126 @@
+
+{# Citation for the following function: 
+ Date: 5/21/24
+ Adapted from CS 340 Web Application Technology material
+ Adapted Javascript functions from instructor material provided and changed to create functions needed for our project and its needs.
+ Source URL: https://canvas.oregonstate.edu/courses/1958399/pages/exploration-web-application-technology?module_item_id=24181847
+#}
+<html>
+
+<head>
+    <title>Finding Dory Dental</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <script language="JavaScript">
+        function showform(dowhat) {
+          /*
+          * four DIVS: browse, insert, update, delete
+          * this function sets one visible the others not
+          */
+          if (dowhat == 'insert'){
+            document.getElementById('browse').style.display = 'none';
+            document.getElementById('insert').style.display = 'block';
+            document.getElementById('update').style.display = 'none';
+            document.getElementById('delete').style.display = 'none';
+          }
+          else if (dowhat == 'update'){
+            document.getElementById('browse').style.display = 'none';
+            document.getElementById('insert').style.display = 'none';
+            document.getElementById('update').style.display = 'block';
+            document.getElementById('delete').style.display = 'none';
+          }
+          else if (dowhat == 'delete'){
+            document.getElementById('browse').style.display = 'none';
+            document.getElementById('insert').style.display = 'none';
+            document.getElementById('update').style.display = 'none';
+            document.getElementById('delete').style.display = 'block';
+          }
+          else if (dowhat == 'all'){
+            document.getElementById('browse').style.display = 'block';
+            document.getElementById('insert').style.display = 'block';
+            document.getElementById('update').style.display = 'block';
+            document.getElementById('delete').style.display = 'block';
+          }
+          else { //by default display browse
+            document.getElementById('browse').style.display = 'block';
+            document.getElementById('insert').style.display = 'none';
+            document.getElementById('update').style.display = 'none';
+            document.getElementById('delete').style.display = 'none';
+          }
+        }
+        function newProvider() { 
+          showform('insert'); 
+        }
+        function browseProvider() {
+          showform('browse'); 
+        }
+      </script>
+</head>
+<body onload="browseProvider()">
+  <h1>Finding Dory Dental</h1>
+    <nav class="menu">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/specialties">Specialties</a></li>
+            <li><a href="/providers">Providers</a></li>
+            <li><a href="/patients">Patients</a></li>
+            <li><a href="/treatments">Treatments</a></li>
+            <li><a href="/treatmentordersandorderedtreatments">Treatment Orders and Ordered Treatments</a></li>
+        </ul>
+        </nav>
+
+    <h1>Providers</h1>
+    <p></p>
+    <div id="browse" style="display: block">
+        <p><strong>Dental Providers at Finding Dory Dental</strong></p>
+        <table border="1" cellpadding="8">
+          <tr>
+            <th><a href="#" onClick="newProvider()">New</a></th>
+            <th>Provider ID</th>
+            <th>Name</th>
+            <th>Specialty Name</th>
+          </tr>
+          <tr>
+            <td></td>
+            <td align="right" >1</td>
+            <td >Dr. Robert Green</td>
+            <td align="right" >General</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td align="right" >2</td>
+            <td >Dr. Liz Dee</td>
+            <td align="right" >General</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td align="right" >3</td>
+            <td >Dr. Sam Kim</td>
+            <td align="right" >Periodontics</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td align="right" >4</td>
+            <td >Dr. Ana Garcia</td>
+            <td align="right" >Endodontics</td>
+          </tr>
+        </table>
+        <p>&nbsp;</p>
+        </div> <!-- browse -->
+        <div id="insert">
+          <form method="POST" id="addProvider">
+            <legend><strong>Add Provider</strong></legend>
+              <fieldset class="fields">
+                <label> Name </label> <input type="text" name="name">
+                <label> Specialty Name </label> <select name="specialtyID">
+                    <option value="0" selected >General</option>
+                    <option value="1">Orthodontics</option>
+                    <option value="2">Endodontics</option>
+                    <option value="3">Periodontics</option>
+                </select>
+              </fieldset>
+              <input class="btn" type="submit" id="addProvider" value="Add provider">
+              <input class="btn" type="button" value="cancel" onClick="browseProvider()">
+          </form> 
+        </div><!-- insert --> 
+</body>
+</html>

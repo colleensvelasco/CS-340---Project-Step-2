@@ -1,0 +1,102 @@
+<html>
+
+<head>
+	<title>Edit Patients</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <div>
+        <table border="1" cellpadding="5"> 
+            <caption> Editing Patient: </caption>
+            <!-- Access data tuple passed from app.py -->
+            <thead>
+                        <tr>
+                            <!-- Adds new Patient -->
+                            <th><a href="#" onClick="newPatient()">New</a></th>
+
+            <!-- Gets data tuple passed from app.py -->
+            {% if data %}
+
+                                <!-- Iterate through each key in the first entry to get the column name -->
+                                {% for key in data[0].keys() %}
+
+                                    <!-- Create a <th> tag with the key inside of it, for our header row -->
+                                    <th scope="col" data-field="{{ key }}" data-filter-control="input">{{ key }}</th>
+
+                                <!-- Finishes for loop -->
+                                {% endfor %}
+                        </tr>
+                
+            <tbody>
+                        <!-- Iterate through every item in data -->
+                        {% for item in data %}
+
+                        <tr>
+
+                            <!-- Creates Edit and Delete buttons -->
+                            <td><a href="edit_patient/{{item.patientID}}" class="btn btn-default">Edit</a></td>
+                            <td><a href="delete_patient/{{item.patientID}}" class="btn btn-default">Delete</a></td>
+                            
+                            <!-- Iterate through every key in the current item dictionary -->
+                            {% for key in item.keys() %}
+
+                                <!-- Creates a <td> element with the value of that key in it -->
+                                <td> {{item[key]}} </td>
+
+                            <!-- Finishes for loop -->
+                            {% endfor %}
+
+                        </tr>
+
+                        <!-- Finishes for loop -->
+                        {% endfor %}
+
+            <!-- Ends if -->
+            {% endif %}
+
+        </table>
+
+
+    
+        <div id="update" >
+                <!-- UPDATE/EDIT form for data in Patients -->
+                <form id="updatePatient" action="/update_patients/{{data[0].patientID}}" method="POST">
+                <legend><strong>Update Patient</strong></legend>
+                <fieldset class="fields">
+                        <label>Patient ID:</label>
+                        <input type="hidden" value="{{data[0].patientID}}" class="form-control" id="patientID" name="patientID" required>
+                        
+                        <label>Name: </label> 
+                        <input type="text" class="form-control" id="name" name="name" pattern="{{data[0].patientName}}" placeholder="">
+                  
+                        <label>Birth Date </label> 
+                        <input type="date" class="form-control" id="birthdate" name="birthdate" value="{{data[0].birthdate}}" required>
+
+                        <label>Email </label> 
+                        <input type="text" class="form-control" id="email" name="email" pattern="[A-Za-z0-9]{1,}" placeholder="{{data[0].email}}" required>
+
+                        <label>Provider Name </label> 
+                        <select class="form-control" id="ptproviderID" name="ptproviderID" pattern="[0-4]{1}" placeholder="" required>
+                            <!-- Access our providers tuple passed from app.py-->
+                            <option value="0">&nbsp;</option>
+                            {% for ptproviderID in ptproviderIDs %}
+                                <!-- If the value iterated provider matches the value of the provider of person currently Editing, pre-select that option -->
+                                {% if ptproviderID['providerID'] == data[0].ptproviderID %}
+                                    <option value="{{ ptproviderID['providerID'] }}" selected> {{ptproviderID['name']}}</option>
+                                {% else %}
+                                    <option value="{{ ptproviderID['providerID'] }}"> {{ptproviderID['name']}}</option> 
+                                {% endif %}
+                        </select>
+                            
+                </fieldset>
+
+                <!-- UPDATE PATIENT and CANCEL buttons-->
+                    <input type="submit" value="Update Patient" name="Update_Patient" class="btn btn-primary" style="margin:.5rem;">
+                    <input class="btn" type="button" value="Cancel" onClick="browsePatient()">
+
+                </form> 
+
+        </div> <!-- update/edit -->
+
+</html>

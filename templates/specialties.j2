@@ -1,0 +1,117 @@
+{# Citation for the following function:
+   Date: 5/21/24
+   Adapted from CS 340 Web Application Technology material
+   Adapted Javascript functions from instructor material provided and changed to create functions needed for our project and its needs.
+   Source URL: https://canvas.oregonstate.edu/courses/1958399/pages/exploration-web-application-technology?module_item_id=24181847
+#}
+
+<html>
+<head>
+    <title>Finding Dory Dental</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <script language="JavaScript">
+        function showform(dowhat) {
+          /*
+          * four DIVS: browse, insert, update, delete
+          * this function sets one visible the others not
+          */
+          if (dowhat == 'insert'){
+            document.getElementById('browse').style.display = 'none';
+            document.getElementById('insert').style.display = 'block';
+            document.getElementById('update').style.display = 'none';
+            document.getElementById('delete').style.display = 'none';
+          }
+          else if (dowhat == 'update'){
+            document.getElementById('browse').style.display = 'none';
+            document.getElementById('insert').style.display = 'none';
+            document.getElementById('update').style.display = 'block';
+            document.getElementById('delete').style.display = 'none';
+          }
+          else if (dowhat == 'delete'){
+            document.getElementById('browse').style.display = 'none';
+            document.getElementById('insert').style.display = 'none';
+            document.getElementById('update').style.display = 'none';
+            document.getElementById('delete').style.display = 'block';
+          }
+          else if (dowhat == 'all'){
+            document.getElementById('browse').style.display = 'block';
+            document.getElementById('insert').style.display = 'block';
+            document.getElementById('update').style.display = 'block';
+            document.getElementById('delete').style.display = 'block';
+          }
+          else { //by default display browse
+            document.getElementById('browse').style.display = 'block';
+            document.getElementById('insert').style.display = 'none';
+            document.getElementById('update').style.display = 'none';
+            document.getElementById('delete').style.display = 'none';
+          }
+        }
+        function newSpecialties() { 
+          showform('insert'); 
+        }
+        function browseSpecialties() {
+          showform('browse'); 
+        }
+        function showAll() { 
+            showform ('all'); }
+      </script>
+</head>
+<body onload="browseSpecialties()">
+  <h1>Finding Dory Dental</h1>
+    <nav class="menu">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/specialties">Specialties</a></li>
+            <li><a href="/providers">Providers</a></li>
+            <li><a href="/patients">Patients</a></li>
+            <li><a href="/treatments">Treatments</a></li>
+            <li><a href="/treatmentordersandorderedtreatments">Treatment Orders and Ordered Treatments</a></li>
+        </ul>
+        </nav>
+
+    <h1>Specialties</h1>
+    <p></p>
+    <div id="browse" style="display: block">
+        <p><strong>Finding Dory Dental Specialties</strong></p>
+        <table border="1" cellpadding="8">
+          <tr>
+            <th><a href="#" onClick="newSpecialties()">New</a></th>
+            <th>ID</th>
+            <th>Specialty Name</th>
+          </tr>
+          <tr>
+            <td></td>
+            <td align="right" >1</td>
+            <td >General</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td align="right" >2</td>
+            <td >Orthodontics</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td align="right" >3</td>
+            <td >Endodontics</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td align="right" >4</td>
+            <td >Periodontics</td>
+          </tr>
+        </table>
+        <p>&nbsp;</p>
+        </div> <!-- browse -->
+        <div id="insert">
+          <form method="POST" id="addSpecialty">
+            <legend><strong>Add Specialty</strong></legend>
+              <fieldset class="fields">
+                <label> Specialty Name </label> <input type="text" name="specialtyName">
+              </fieldset>
+              <input class="btn" type="submit" id="addSpecialty" value="Add specialty">
+              <input class="btn" type="button" value="cancel" onClick="browseSpecialties()">
+          </form> 
+        </div><!-- insert -->
+    
+</body>
+</html>

@@ -1,0 +1,291 @@
+{# Citation for the following function:
+   Date: 5/21/24
+   Adapted from CS 340 Web Application Technology material
+   Adapted Javascript functions from instructor material provided and changed to create functions needed for our project and its needs.
+   Source URL: https://canvas.oregonstate.edu/courses/1958399/pages/exploration-web-application-technology?module_item_id=24181847
+#}
+
+<html>
+<head>
+    <title>Finding Dory Dental</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <script language="JavaScript">
+        function showform(dowhat) {
+          /*
+          * four DIVS: browse, insert, update, delete
+          * this function sets one visible the others not
+          */
+          if (dowhat == 'insert'){
+            document.getElementById('browse').style.display = 'none';
+            document.getElementById('insert').style.display = 'block';
+            document.getElementById('update').style.display = 'none';
+            document.getElementById('delete').style.display = 'none';
+          }
+          else if (dowhat == 'insertOrderedTreatment'){
+            document.getElementById('browse').style.display = 'none';
+            document.getElementById('insertOrderedTreatment').style.display = 'block';
+            document.getElementById('update').style.display = 'none';
+            document.getElementById('delete').style.display = 'none';
+          }
+
+          else if (dowhat == 'update'){
+            document.getElementById('browse').style.display = 'none';
+            document.getElementById('insert').style.display = 'none';
+            document.getElementById('update').style.display = 'block';
+            document.getElementById('delete').style.display = 'none';
+          }
+          else if (dowhat == 'delete'){
+            document.getElementById('browse').style.display = 'none';
+            document.getElementById('insert').style.display = 'none';
+            document.getElementById('update').style.display = 'none';
+            document.getElementById('delete').style.display = 'block';
+          }
+          else if (dowhat == 'all'){
+            document.getElementById('browse').style.display = 'block';
+            document.getElementById('insert').style.display = 'block';
+            document.getElementById('update').style.display = 'block';
+            document.getElementById('delete').style.display = 'block';
+          }
+          else { //by default display browse
+            document.getElementById('browse').style.display = 'block';
+            document.getElementById('insert').style.display = 'none';
+            document.getElementById('update').style.display = 'none';
+            document.getElementById('delete').style.display = 'none';
+            document.getElementById('insertOrderedTreatment').style.display = 'none';
+          }
+        }
+
+        function newTreatmentOrder() { 
+          showform('insert'); 
+        }
+        function newOrderedTreatment() {
+          showform('insertOrderedTreatment');
+        }
+
+        function editOrderedTreatment() {
+          showform('update');
+        }
+      
+        function deleteOrderedTreatment() {
+          showform('delete');
+        }
+        function browseTreatmentOrderAndOrderedTreatment() {
+          showform('browse'); 
+        }
+        function showAll() { 
+            showform ('all'); }
+      </script>
+</head>
+<body onload="browseTreatmentOrderAndOrderedTreatment()">
+  <h1>Finding Dory Dental</h1>
+    <nav class="menu">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/specialties">Specialties</a></li>
+            <li><a href="/providers">Providers</a></li>
+            <li><a href="/patients">Patients</a></li>
+            <li><a href="/treatments">Treatments</a></li>
+            <li><a href="/treatmentordersandorderedtreatments">Treatment Orders and Ordered Treatments</a></li>
+        </ul>
+        </nav>
+
+    
+    <h1>Treatment Orders and Ordered Treatments</h1>
+    <div id="browse" style="display: block">
+        <p>&nbsp;</p>
+        <h2>Treatment Orders Record</h2>
+        <p>A treatment order can be created for a patient and specific treatments, such as an exam, prophy, and filling, can 
+          be added to it. 
+        </p>
+        <table border="1" cellpadding="8">
+          <tr>
+            <th><a href="#" onClick="newTreatmentOrder()">New</a></th>
+            <th>Treatment Order ID</th>
+            <th>Patient ID</th>
+            <th>Treatment Date</th>
+          </tr>
+          <tr>
+            <td></td>
+            <td align="right" >1</td>
+            <td align="right" >1</td>
+            <td align="right" >2024-08-21</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td align="right" >2</td>
+            <td align="right" >2</td>
+            <td align="right" >2024-08-10</td>
+          </tr>
+        </table>
+
+
+
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <h2>Ordered Treatments Record</h2>
+        <p>Treatments (i.e. exam, prophy, and filling) can be added, edited, and deleted from the treatment order they are contained on.</p>
+          <table border="1" cellpadding="8">
+            <tr>     
+              <th><a href="#" onClick="newOrderedTreatment()">New</a></th>
+              <th></th>
+          
+              <th>Treatment Order ID</th>
+              <th>Treatment ID</th>
+            </tr>
+          <tr>
+            <td><a href="#" onclick="editOrderedTreatment('this.orderedTreatmentID')">Edit</a></td>
+            <td><a href="#" onclick="deleteOrderedTreatment('this.orderedTreatmentID')">Delete</a></td>
+            <td align="right" >1</td>
+            <td align="right" >1</td>
+          </tr>
+          <tr>
+            <td><a href="#" onclick="editOrderedTreatment('this.orderedTreatmentID')">Edit</a></td>
+            <td><a href="#" onclick="deleteOrderedTreatment('this.orderedTreatmentID')">Delete</a></td>
+            <td align="right" >1</td>
+            <td align="right" >2</td>
+          </tr>
+          <tr>
+            <td><a href="#" onclick="editOrderedTreatment('this.orderedTreatmentID')">Edit</a></td>
+            <td><a href="#" onclick="deleteOrderedTreatment('this.orderedTreatmentID')">Delete</a></td>
+            <td align="right" >2</td>
+            <td align="right" >3</td>
+          </tr>
+        </table>
+        <p>&nbsp;</p>
+        </div>
+        
+        
+        <!-- browse INSERT Treatment Order-->
+        <div id="insert">
+          <form method="POST" id="addTreatmentOrder">
+            <legend><strong>Create a New Treatment Order</strong></legend>
+              <fieldset class="fields">
+                <label> Patient Name </label> <select name="treatmentName">
+                    <option value="1" selected>Abby Lee</option>
+                    <option value="2">Greg Bill</option>
+                    <option value="3">Hannah Williams</option>
+                    <option value="4">Alex Cruz</option>
+                  </select>
+                <label> Treatment Date </label> <input type="date" value="2024-05-08" />
+                </select>
+              </fieldset>
+              <p>&nbsp;</p>
+              <legend><strong>Add Treatments to the New Treatment Order</strong></legend>
+              <fieldset class="fields">
+                <label> Treatment Name: </label><select name="treatmentName">
+                  <option value="0" selected></option>
+                  <option value="1">prophy</option>
+                  <option value="2">exam</option>
+                  <option value="3">filling</option>
+                  <option value="4">root canal</option>
+                </select>
+                <br>
+                <br>
+                  <label> Treatment Name: </label><select name="treatmentName">
+                    <option value="0" selected></option>
+                    <option value="1">prophy</option>
+                    <option value="2">exam</option>
+                    <option value="3">filling</option>
+                    <option value="4">root canal</option>
+                </select>
+                <br>
+                <br>
+                <label> Treatment Name: </label><select name="treatmentName">
+                  <option value="0" selected></option>
+                  <option value="1">prophy</option>
+                  <option value="2">exam</option>
+                  <option value="3">filling</option>
+                  <option value="4">root canal</option>
+                </select>
+                <br>
+                <br>
+                <label> Treatment Name: </label><select name="treatmentName">
+                  <option value="0" selected></option>
+                  <option value="1">prophy</option>
+                  <option value="2">exam</option>
+                  <option value="3">filling</option>
+                  <option value="4">root canal</option>
+                </select>
+                <br>
+                <br>
+                <label> Treatment Name: </label><select name="treatmentName">
+                  <option value="0" selected></option>
+                  <option value="1">prophy</option>
+                  <option value="2">exam</option>
+                  <option value="3">filling</option>
+                  <option value="4">root canal</option>
+                </select>
+              </fieldset>
+              <input class="btn" type="submit" id="addTreatmentOrder" value="Add Treatment Order">
+              <input class="btn" type="button" value="cancel" onClick="browseTreatmentOrderAndOrderedTreatment()">
+          </form> 
+        </div><!-- insert --> 
+        <p>&nbsp;</p>
+         <!-- browse INSERT Intersection Table -->
+        <div id="insertOrderedTreatment">
+          <form method="POST" id="addOrderedTreatment">
+            <legend><strong>Add ordered treatments to order created</strong></legend>
+              <fieldset class="fields">
+                <label> Treatment Order of Patient Name: </label> <select name="patientName">
+                  <option value="1" selected>Abby Lee</option>
+                  <option value="2">Greg Bill</option>
+                  <option value="3">Hannah Williams</option>
+                  <option value="4">Alex Cruz</option>
+                </select>
+                <label> on the Date: </label> <input type="date" value="2024-05-08" />
+                <br>
+                <br>
+                </select>
+                <label> Treatment Name </label><select name="treatmentName">
+                  <option value="1" selected>prophy</option>
+                  <option value="2">exam</option>
+                  <option value="3">filling</option>
+                  <option value="4">root canal</option>
+              </select>
+                </select>
+              </fieldset>
+              <input class="btn" type="submit" id="addOrderedTreatment" value="Add ordered treatments">
+              <input class="btn" type="button" value="cancel" onClick="browseTreatmentOrderAndOrderedTreatment()">
+          </form> 
+        </div><!-- insert --> 
+      <!-- UPDATE Treatment Order-->
+      <p>&nbsp;</p>
+      <div id="update" >
+        <form method="POST" id="updateTreatmentOrder">
+          <legend><strong>Update ordered treatment</strong></legend>
+              <fieldset class="fields">
+                <label> Treatment Order ID: </label> 1
+                <!-- WILL CHECK IF IT'S OKAY THAT FOR UPDATE WE CAN ONLY CHANGE TREATMENT BUT NOT TREATMENTORDER IT'S ASSIGNED TO-->
+                <label> Treatment Name: </label><select name="treatmentName">
+                  <option value="1" selected>prophy</option>
+                  <option value="2">exam</option>
+                  <option value="3">filling</option>
+                  <option value="4">root canal</option>
+              </select>
+              <!--What should we do with the price here?
+              <label> Total Cost </label> <input type="text" name="totalCost">-->
+        </fieldset>
+        <input class="btn" type="submit" id="UpdateSaveTreatmentOrder" value="Save Update Treatment Order">
+              <input class="btn" type="button" value="cancel" onClick="browseTreatmentOrderAndOrderedTreatment()">
+        </form> 
+      </div>
+      <p>&nbsp;</p>
+      <!-- DELETE Ordered Treatment-->
+      <div id="delete" style="display: block">
+        <form method="POST" id="deleteOrderedTreatment">
+          <legend><strong>Delete Ordered Treatment Order</strong></legend>
+              <fieldset class="fields">
+              <p>Are you sure you wish to delete the following?</p>
+              <label> Treatment Order ID: </label> 1
+              <label> Treatment Name: </label> prophy
+                
+        </fieldset>
+        <input class="btn" type="submit" id="deleteOrderedTreatmentOrder" value="Delete ordered treatment order">
+              <input class="btn" type="button" value="cancel" onClick="browseTreatmentOrderAndOrderedTreatment()">
+        </form> 
+      </div>
+      <p>&nbsp;</p>
+      
+    
+</body>
+</html>
